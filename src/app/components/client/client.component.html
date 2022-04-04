@@ -1,0 +1,5 @@
+<app-client-data-table *ngIf="!loading" [clients]="clients" (edit)="onEditClick($event)"
+  (delete)="onDeleteClick($event)" (add)="onAddClick($event)"></app-client-data-table>
+<app-client-form *ngIf="display" [selectedClient]="selectedClient" [formName]="formName"
+  (closeOverlay)="onCloseOverlay($event)" (editUser)="onUpdateSubmit($event)" (createUser)="onCreateSubmit($event)"
+  (deleteUser)="onDeleteSubmit($event)"></app-client-form>

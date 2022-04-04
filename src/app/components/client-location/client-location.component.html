@@ -1,0 +1,5 @@
+<app-client-location-data-table *ngIf="!loading" [clientLocations]="clientLocations" (edit)="onEditClick($event)"
+  (delete)="onDeleteClick($event)" (add)="onAddClick($event)"></app-client-location-data-table>
+<app-client-location-form *ngIf="display" [selectedClientLocation]="selectedClientLocation" [formName]="formName"
+  (closeOverlay)="onCloseOverlay($event)" (editUser)="onUpdateSubmit($event)" (createUser)="onCreateSubmit($event)"
+  (deleteUser)="onDeleteSubmit($event)"></app-client-location-form>

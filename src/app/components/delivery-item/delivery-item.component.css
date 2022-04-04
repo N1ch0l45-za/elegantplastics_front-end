@@ -1,0 +1,8 @@
+.item-form {
+  width: 100%;
+}
+
+.item-form>* {
+  width: 33.3%;
+  display: inline;
+}

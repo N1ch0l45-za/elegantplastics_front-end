@@ -1,0 +1,5 @@
+<app-user-data-table *ngIf="!loading" [users]="users" (edit)="onEditClick($event)" (delete)="onDeleteClick($event)"
+  (add)="onAddClick($event)"></app-user-data-table>
+<app-user-form *ngIf="display" [selectedUser]="selectedUser" [formName]="formName"
+  (closeOverlay)="onCloseOverlay($event)" (editUser)="onUpdateSubmit($event)" (createUser)="onCreateSubmit($event)"
+  (deleteUser)="onDeleteSubmit($event)"></app-user-form>

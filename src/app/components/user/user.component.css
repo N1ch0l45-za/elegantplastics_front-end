@@ -1,0 +1,57 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+th:nth-child(1) {
+  width: 20%;
+}
+
+th:nth-child(2) {
+  width: 20%;
+}
+
+th:nth-child(3) {
+  width: 15%;
+}
+
+th:nth-child(4) {
+  width: 15%;
+}
+
+th:nth-child(5) {
+  width: 15%;
+}
+
+th:nth-child(6) {
+  width: 20%;
+}
+
+tr.mat-header-row {
+  background-color: #343a40 !important;
+  border-color: #454d55 !important;
+}
+
+tr.mat-header-row th {
+  color: #fff !important;
+}
+
+tr.mat-row:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, .05);
+}
+
+button {
+  min-width: 49%;
+}
+
+button:first-child {
+  margin-right: 2%;
+}
+
+.form-group {
+  margin-bottom: 0px;
+}

@@ -1,0 +1,36 @@
+<div class="client-print-details" *ngIf="!gettinglocations">
+  <h3>{{clientlocation}}</h3>
+  <button class="btn btn-primary" (click)="gotoprint()">Print</button>
+</div>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Barcode</th>
+      <th>Quantity</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="!loading">
+    <tr *ngFor="let deliveyItem of deliveyItems">
+      <td>
+        {{deliveyItem.item_barcode}}
+      </td>
+      <td>
+        {{deliveyItem.quantity}}
+      </td>
+      <td>
+        <button class="btn btn-danger" type="button" (click)="deleteItem(deliveyItem.id)"><i
+            class="fa-solid fa-minus"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<form class="item-form" (keydown)="keyDownFunction($event)" autocomplete="off">
+  <input class="form-control" type="text" id="item_barcode" [(ngModel)]="newdeliveyItem.item_barcode"
+    name="item_barcode" />
+  <input class="form-control" type="text" id="quantity" [(ngModel)]="newdeliveyItem.quantity" name="quantity" />
+  <button class="btn btn-success" type="button" (click)="addItem()"><i class="fa-solid fa-plus"></i></button>
+</form>
+<app-item-form *ngIf="display" [selectedItem]="selectedItem" [formName]="formName"
+  (closeOverlay)="onCloseOverlay($event)" (editUser)="onUpdateSubmit($event)" (createUser)="onCreateSubmit($event)"
+  (deleteUser)="onDeleteSubmit($event)"></app-item-form>

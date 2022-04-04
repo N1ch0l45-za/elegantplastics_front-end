@@ -1,0 +1,86 @@
+<div class="overlay">
+  <div class="card">
+    <div class="card-header">
+      <h3>{{formName}}</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="deliveryFormGroup" autocomplete="off">
+        <div class="form-group" controlId="Id">
+          <label for="InputId">ID</label>
+          <input [readonly]="formHeader === 'Edit Delivery' || formHeader === 'Create Delivery'" class="form-control"
+            id="InputId" placeholder="Enter ID" formControlName="id">
+        </div>
+        <div class="form-group" controlId="Client_id">
+          <label for="InputClientID">Client</label>
+          <select class="form-control" id="SelectClientID" (click)="filterClientLocationList()"
+            formControlName="client_id">
+            <option *ngFor="let client of clientList" value="{{client.id}}">{{client.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" controlId="Client_location_id">
+          <label for="SelectClientLoctionID">Location</label>
+          <select class="form-control" id="SelectClientLoctionID" formControlName="client_location_id">
+            <option value="Select location" disabled selected>Select location</option>
+            <option *ngFor="let location of clientLocations" value="{{location.id}}">{{location.address}}</option>
+          </select>
+        </div>
+        <div class="form-group" controlId="Courier_id">
+          <label for="SelectCourierID">Courier</label>
+          <select class="form-control" id="SelectCourierID" formControlName="courier_id">
+            <option value="Select courier" disabled selected>Select courier</option>
+            <option value="">No courier</option>
+            <option *ngFor="let courier of couriers" value="{{courier.id}}">{{courier.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" controlId="Packing_date">
+          <label for="InputClientLocationID">Packing Date</label>
+          <input type="text" class="form-control" id="InputClientID" placeholder="Enter packing date"
+            formControlName="packing_date">
+        </div>
+        <div class="form-group" controlId="Reference_num">
+          <label for="InputReferenceNum">Reference Number</label>
+          <input type="text" class="form-control" id="InputReferenceNum" placeholder="Enter Reference Number"
+            formControlName="reference_num">
+        </div>
+        <div class="form-group" controlId="Del_type">
+          <label for="SelectDelType">Delivery Type</label>
+          <select class="form-control" id="SelectDelType" formControlName="del_type">
+            <option value="Collect">Collect</option>
+            <option value="Delivery">Delivery</option>
+          </select>
+        </div>
+        <div class="form-group" controlId="Collection_date">
+          <label for="InputCollectionDate">Collection Date</label>
+          <input type="text" class="form-control" id="InputCollectionDate" placeholder="Enter Collection Date"
+            formControlName="collection_date">
+        </div>
+        <div class="form-group" controlId="Invoice_number">
+          <label for="InputInvoiceNumber">Number of Packages</label>
+          <input type="text" class="form-control" id="InputInvoiceNumber" placeholder="Enter Number of Packages"
+            formControlName="invoice_number">
+        </div>
+        <div class="form-group" controlId="Status">
+          <label for="Selectstatus">Status</label>
+          <select class="form-control" id="Selectstatus" formControlName="status">
+            <option value="Packing" selected>Packing</option>
+            <option value="Waiting for collection">Waiting for collection</option>
+            <option value="Waiting for delivery">Waiting for delivery</option>
+            <option value="Collected">Collected</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+        </div>
+        <div class="mt-3 space-buttons">
+          <button class="btn btn-secondary" (click)="onCloseClick()">Cancel</button>
+          <button *ngIf="formHeader === 'Create Delivery'" (click)="onCreateClick()"
+            class="btn btn-success">Create</button>
+          <button *ngIf="formHeader === 'Edit Delivery'" (click)="onEditClick()" class="btn btn-warning">Edit</button>
+          <button *ngIf="formHeader === 'Edit Delivery'" (click)="onAddItemsClick(deliveryFormGroup.value.id)"
+            class="btn btn-primary">Add
+            Items</button>
+          <button *ngIf="formHeader === 'Delete Delivery'" (click)="onDeleteClick()"
+            class="btn btn-danger">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="page-print">
+  <div class="logo"><img src="./../../../assets/LOGO.bmp"></div>
+  <div class="delivery-note">
+    <h2>Delivery Note</h2>
+  </div>
+  <div class="date">
+    <span class="left">Date</span><span class="right">{{ dateToday | date: "yyyy-MM-dd" }}</span>
+  </div>
+  <div class="page">
+    <span class="left">Page</span>
+    <span class="right">1</span>
+  </div>
+  <div class="documnet-no">
+    <span class="left">Document No</span>
+    <span class="right">{{getDocumentNum(delivery.id)}}</span>
+  </div>
+  <div class="client">
+    <p>{{getClientName(delivery.client_id)}}</p>
+    <p>{{getClientAddress(delivery.client_id)}}</p>
+  </div>
+  <div class="courier">
+    <h3>{{getCourierDetails(delivery.courier_id)}}</h3>
+  </div>
+  <div class="packages">
+    <p class="left">No. of Packages: </p>
+    <p class="right">{{delivery.invoice_number}}</p>
+  </div>
+  <div class="location">
+    <p>Delivery to:</p>
+    <p>{{getClientLocationDetails(delivery.client_location_id)}}</p>
+  </div>
+  <div class="info">
+    <p class="left">Referrence</p>
+    <p class="right">{{delivery.reference_num}}</p>
+  </div>
+  <div class="goods">
+    <table>
+      <thead>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Quantity</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let deliveryItem of deliveryItems">
+          <td class="block">{{deliveryItem.item_barcode}}</td>
+          <td class="block">
+            <div>
+              <p>{{getItemDescriptionDetails(deliveryItem.item_barcode)}}</p>
+            </div>
+          </td>
+          <td class="block">{{deliveryItem.quantity}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th>Total: {{addToTotal()}}</th>
+      </tfoot>
+    </table>
+  </div>
+  <div class="terms">
+    <p>I hearby acknowledge that as the goods supplied/ to me is to my satisfaction and satisfies the requirements of
+      the goods ordered I will refrain from requesting any refunds; replacment of goods or repair of goods. I
+      furthermore accept full responsibility for any damage to goods that is damaged while under my control and
+      pertaining to my own negligence or fault. I may however request a refund; repair; or replacement of goods if the
+      goods delivered is established to be of an inferior nature/quality; defective or as agreed by the parties; which
+      refund, replacement or repaid must be requested within six months from date of delivery/return of goods.</p>
+    <p>
+      <span class="title">Name:</span><span class="dots"></span><span class="title">on:</span><span
+        class="dots"></span><span class="title">Signed:</span><span class="dots"></span>
+    </p>
+  </div>
+</div>

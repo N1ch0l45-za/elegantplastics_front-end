@@ -1,0 +1,19 @@
+<div class="body">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand">Elegant Plastics</a>
+      <ul class="nav navbar-nav" routerLinkActive="active">
+        <li class="nav-item"><a class="nav-link" routerLink="client" routerLinkActive="active">Clients</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="courier" routerLinkActive="active">Couriers</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="delivery" routerLinkActive="active">Deliveries</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="item" routerLinkActive="active">Items</a></li>
+        <li *ngIf="role == 'Admin'" class="nav-item"><a class="nav-link" routerLink="user"
+            routerLinkActive="active">Users</a></li>
+        <li class="nav-item"><a class="nav-link" (click)="Logout()" routerLinkActive="active">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

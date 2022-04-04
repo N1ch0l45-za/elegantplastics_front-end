@@ -1,0 +1,40 @@
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.card {
+  width: min(85vw, 600px);
+  height: min(85vw, 450px);
+  background: #fff;
+  border-radius: 15%;
+}
+
+.card-header {
+  text-align: center;
+  padding: 1rem;
+}
+
+.btn {
+  color: #000;
+  width: 35%;
+  margin: 0 auto;
+  display: block;
+}
+
+.btn:hover {
+  color: #fff;
+  box-shadow: 2px 2px #000;
+}
+
+.form-id {
+  display: none;
+}

@@ -1,0 +1,39 @@
+<div class="overlay">
+  <div class="card">
+    <div class="card-header">
+      <h3>{{formName}}</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="clientFormGroup" autocomplete="off">
+        <div class="form-group" controlId="Id">
+          <label for="InputId">ID</label>
+          <input [readonly]="formHeader === 'Edit Client' || formHeader === 'Create Client'" class="form-control"
+            id="InputId" placeholder="Enter Id" formControlName="id">
+        </div>
+        <div class="form-group" controlId="Name">
+          <label for="InputName">Name</label>
+          <input type="text" class="form-control" id="InputName" placeholder="Enter name" formControlName="name">
+        </div>
+        <div class="form-group" controlId="Address">
+          <label for="InputAddress">Address</label>
+          <input type="text" class="form-control" id="InputAddress" placeholder="Enter address"
+            formControlName="address">
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <button class="btn btn-secondary" (click)="onCloseClick()">Cancel</button>
+          </div>
+          <div class="col-6" *ngIf="formHeader === 'Create Client'">
+            <button (click)="onCreateClick()" class="btn btn-success">Create</button>
+          </div>
+          <div class="col-6" *ngIf="formHeader === 'Edit Client'">
+            <button (click)="onEditClick()" class="btn btn-warning">Edit</button>
+          </div>
+          <div class="col-6" *ngIf="formHeader === 'Delete Client'">
+            <button (click)="onDeleteClick()" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

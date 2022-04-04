@@ -1,0 +1,69 @@
+<mat-form-field appearance="standard" class="search-form">
+  <mat-label>Search</mat-label>
+  <input matInput (keyup)="applyFilter($event)" class="search" placeholder="Search" #input>
+</mat-form-field>
+<button class="btn btn-success ml-3" (click)="addDelivery(true)"><i class="fa-solid fa-plus"></i></button>
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table data-table" matSort aria-label="Elements" [dataSource]="dataSource">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id">ID</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Client Column -->
+    <ng-container matColumnDef="client">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by client">Client</th>
+      <td mat-cell *matCellDef="let row">{{getClient(row.client_id)}}</td>
+    </ng-container>
+
+    <!-- Location Column -->
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by location">Location</th>
+      <td mat-cell *matCellDef="let row">{{getLocation(row.client_location_id)}}</td>
+    </ng-container>
+
+    <!-- Reference Column -->
+    <ng-container matColumnDef="reference">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by reference">Reference</th>
+      <td mat-cell *matCellDef="let row">{{row.reference_num}}</td>
+
+    </ng-container><!-- invoice Column -->
+    <ng-container matColumnDef="invoice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by invoice">Invoice</th>
+      <td mat-cell *matCellDef="let row">{{row.invoice_number}}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">Status</th>
+      <td mat-cell *matCellDef="let row">{{row.status}}</td>
+    </ng-container>
+
+    <!-- edit Column -->
+    <ng-container matColumnDef="print">
+      <th mat-header-cell *matHeaderCellDef>Print</th>
+      <td mat-cell *matCellDef="let row"><button class="btn btn-primary" (click)="printDelivery(row.id)"><i
+            class="fa-solid fa-print"></i></button></td>
+    </ng-container>
+
+    <!-- edit Column -->
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>Edit</th>
+      <td mat-cell *matCellDef="let row"><button class="btn btn-warning" (click)="editDelivery(row.id)"><i
+            class="fa-solid fa-pen"></i></button></td>
+    </ng-container>
+
+    <!-- delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Delete</th>
+      <td mat-cell *matCellDef="let row"><button class="btn btn-danger" (click)="deleteDelivery(row.id)"><i
+            class="fa-solid fa-minus"></i></button></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+</div>

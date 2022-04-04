@@ -1,0 +1,170 @@
+.page-print {
+  display: grid;
+  gap: 2px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  border: 0px solid #000;
+  max-height: 98vh;
+  max-width: 100vw;
+  margin-top: 0px;
+  padding-top: 0px;
+  font-size: small;
+}
+
+div {
+  border: 1px solid #000;
+}
+
+.logo {
+  grid-column: span 3;
+  grid-row: span 2;
+}
+
+.logo img {
+  background-repeat: no-repeat;
+  background-size: contain;
+  max-height: 100%;
+  padding: 1%;
+  max-width: 100%;
+}
+
+.delivery-note h2,
+.courier h2 {
+  text-align: center;
+  white-space: nowrap;
+  font-size: 26px;
+}
+
+.page .left,
+.date .left,
+.documnet-no .left,
+.packages .left {
+  float: left;
+  margin-left: 3%;
+}
+
+.page .right,
+.date .right,
+.documnet-no .right,
+.packages .right {
+  float: right;
+  margin-right: 3%;
+  font-weight: bold;
+}
+
+.packages .right,
+.packages .left {
+  width: 100%;
+}
+
+table tbody tr td,
+table thead th {
+  border: 1px solid #000;
+  padding: 2px;
+}
+
+.client {
+  grid-column: span 2;
+  grid-row: span 2;
+  padding: 5px;
+}
+
+.courier {
+  grid-column: span 1;
+  grid-row: span 2;
+  padding: 5px;
+}
+
+
+.packages {
+  grid-column: span 1;
+  grid-row: span 2;
+  padding: 5px;
+}
+
+
+
+.location {
+  grid-column: span 2;
+  grid-row: span 2;
+  padding: 5px;
+}
+
+.info {
+  grid-column: span 2;
+  grid-row: span 1;
+  padding: 5px;
+}
+
+.info>* {
+  display: inline;
+}
+
+.info .right {
+  float: right;
+  margin-right: 3%;
+}
+
+.goods {
+  grid-column: span 4;
+  grid-row: span 11;
+}
+
+.goods table {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  margin: 5px;
+}
+
+.goods table thead th:nth-child(1) {
+  width: 15%;
+}
+
+.goods table tbody td:nth-child(1) {
+  font-size: small;
+}
+
+.goods table thead th:nth-child(2) {
+  width: 80%;
+}
+
+.goods table tbody td:nth-child(2) div {
+  padding: 1%;
+  border: 0px;
+}
+
+
+.goods table thead th:nth-child(3) {
+  width: 5%;
+}
+
+.goods table tbody tr td:nth-child(3) {
+  text-align: center;
+}
+
+.goods table tbody td p {
+  margin: 0;
+  font-size: small;
+}
+
+.goods table tbody td {}
+
+.terms {
+  grid-column: span 4;
+  grid-row: span 3;
+  padding: 5px;
+  font-size: x-small;
+}
+
+.terms .title {
+  width: 2%;
+  margin-right: 1%;
+  margin-left: 1%;
+  display: inline-block;
+}
+
+.terms .dots {
+  width: calc((90% - (4% * 3)) /3);
+  display: inline-block;
+  border-bottom: 1px dotted #000;
+}
