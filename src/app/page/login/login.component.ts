@@ -34,8 +34,11 @@ export class LoginComponent implements OnInit {
   }
 
   afterLogin = async (token: string) => {
-    const expiryTime = this.ds.getExpiryTime();
-    this.cs.set('ep_delivery_cookie', token, Number(expiryTime));
+    let date = new Date();
+    date.setTime(date.getTime() + 8 * 60 * 60 * 1000);
+    let expires = date;
+
+    this.cs.set('ep_delivery_cookie', token, expires);
     this.rt.navigateByUrl('');
   };
 

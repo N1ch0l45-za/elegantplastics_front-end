@@ -18,6 +18,10 @@ export class PrintComponent implements OnInit {
   dateToday = Date.now();
   Total: number = 0;
   deliveryItems!: DeliveryItemModule[];
+  deliveryItemsPageBreak: {
+    pageNumber: number;
+    ItemsPerPage: DeliveryItemModule[];
+  }[] = [];
 
   constructor(private ds: DataService, private router: Router) {}
 
@@ -25,6 +29,19 @@ export class PrintComponent implements OnInit {
     this.Total = 0;
     this.delivery = this.ds.delivery;
     this.deliveryItems = this.ds.deliveryItems;
+    this.splitDeliveryItemsPerPage(this.deliveryItems);
+  }
+
+  splitDeliveryItemsPerPage(items: DeliveryItemModule[]) {
+    let pageCount: number = Math.floor(items.length / 15);
+
+    for (let i: number = 0; i <= pageCount; i++) {
+      this.deliveryItemsPageBreak.push({
+        pageNumber: i + 1,
+        ItemsPerPage: items.slice(i * 15, (i + 1) * 15),
+      });
+    }
+    console.log(this.deliveryItemsPageBreak.length);
   }
 
   getClientName(id: number): string {

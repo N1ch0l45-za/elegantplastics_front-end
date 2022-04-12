@@ -54,13 +54,12 @@ div {
 
 .packages .right,
 .packages .left {
-  width: 100%;
+  width: 95%;
+  margin: 0 auto;
 }
 
-table tbody tr td,
-table thead th {
-  border: 1px solid #000;
-  padding: 2px;
+table tbody tr td:nth-child(2) div {
+  padding: 0px !important;
 }
 
 .client {
@@ -147,7 +146,11 @@ table thead th {
   font-size: small;
 }
 
-.goods table tbody td {}
+@media print {
+  .page-break {
+    page-break-after: always;
+  }
+}
 
 .terms {
   grid-column: span 4;
