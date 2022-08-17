@@ -38,7 +38,11 @@ export class LoginComponent implements OnInit {
     date.setTime(date.getTime() + 8 * 60 * 60 * 1000);
     let expires = date;
 
-    this.cs.set('ep_delivery_cookie', token, expires);
+    this.cs.set('ep_delivery_cookie', token, {
+      expires: expires,
+      path: '/',
+      sameSite: 'Lax',
+    });
     this.rt.navigateByUrl('');
   };
 

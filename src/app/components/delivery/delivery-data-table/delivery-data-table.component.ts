@@ -7,7 +7,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DeliveryModule } from '../../../module/delivery/delivery.module';
 import { DataService } from '../../../service/data.service';
@@ -53,6 +53,7 @@ export class DeliveryDataTableComponent implements OnInit {
     this.dataSource = new MatTableDataSource<DeliveryModule>(this.deliveries);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource.sort.sort({ id: 'id', start: 'desc' } as MatSortable);
   }
 
   getLocation(id: number): string {

@@ -7,6 +7,7 @@ import jwt_decode from 'jwt-decode';
 import { UserRequestModule } from '../module/user/user.module';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { ItemModule } from '../module/item/item.module';
+import { environment } from '../../environments/environment.prod';
 import {
   DeliveryItemModule,
   DeliveryItemRequestModule,
@@ -37,7 +38,7 @@ export class DataService {
   Token: string = '';
   decodedToken: { [key: string]: string } = {};
   Role: string = '';
-  url: string = 'http://localhost:3005/api';
+  url: string = environment.API;
   users!: UserResponseModule[];
   items!: ItemModule[];
   deliveries!: DeliveryModule[];
@@ -62,16 +63,16 @@ export class DataService {
   }
 
   decodeToken() {
-    if (!this.Token) {
+    if (!this.cs.get('ep_delivery_cookie')) {
       this.Token = this.cs.get('ep_delivery_cookie');
-      this.decodedToken = jwt_decode(this.Token);
+      this.decodedToken = jwt_decode(this.cs.get('ep_delivery_cookie'));
     } else {
-      this.decodedToken = jwt_decode(this.Token);
+      this.decodedToken = jwt_decode(this.cs.get('ep_delivery_cookie'));
     }
   }
 
   getDecodeToken() {
-    return jwt_decode(this.Token);
+    return jwt_decode(this.cs.get('ep_delivery_cookie'));
   }
 
   getUserId() {
@@ -105,7 +106,7 @@ export class DataService {
 
   getUsers(): Observable<[UserResponseModule]> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<[UserResponseModule]>(`${this.url}/user`, {
@@ -115,7 +116,7 @@ export class DataService {
 
   getUser(id: number): Observable<UserModule> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<UserModule>(`${this.url}/user/${id}`, {
@@ -125,7 +126,7 @@ export class DataService {
 
   createUser(user: UserRequestModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.post<any>(
@@ -144,7 +145,7 @@ export class DataService {
 
   updateUser(user: UserModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.put<any>(
@@ -163,7 +164,7 @@ export class DataService {
 
   deleteUser(id: number): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.delete<any>(`${this.url}/user/${id}`, {
@@ -173,7 +174,7 @@ export class DataService {
 
   getItems(): Observable<[ItemModule]> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<[ItemModule]>(`${this.url}/item`, {
@@ -183,7 +184,7 @@ export class DataService {
 
   getItem(barcode: string): Observable<ItemModule> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<ItemModule>(`${this.url}/item/${barcode}`, {
@@ -193,7 +194,7 @@ export class DataService {
 
   createItem(item: ItemModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.post<any>(
@@ -211,7 +212,7 @@ export class DataService {
 
   updateItem(item: ItemModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.put<any>(
@@ -228,7 +229,7 @@ export class DataService {
 
   deleteItem(barcode: string): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.delete<any>(`${this.url}/item/${barcode}`, {
@@ -238,7 +239,7 @@ export class DataService {
 
   getCouriers(): Observable<[CourierModule]> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<[CourierModule]>(`${this.url}/courier`, {
@@ -248,7 +249,7 @@ export class DataService {
 
   getCourier(id: number): Observable<CourierModule> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<CourierModule>(`${this.url}/courier/${id}`, {
@@ -258,7 +259,7 @@ export class DataService {
 
   createCourier(courier: CourierRequestModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.post<CourierRequestModule>(
@@ -274,7 +275,7 @@ export class DataService {
 
   updateCourier(courier: CourierModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.put<any>(
@@ -290,7 +291,7 @@ export class DataService {
 
   deleteCourier(id: number): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.delete<any>(`${this.url}/courier/${id}`, {
@@ -300,7 +301,7 @@ export class DataService {
 
   getClients(): Observable<[ClientModule]> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<[ClientModule]>(`${this.url}/client`, {
@@ -310,7 +311,7 @@ export class DataService {
 
   getClient(id: number): Observable<ClientModule> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<ClientModule>(`${this.url}/client/${id}`, {
@@ -320,7 +321,7 @@ export class DataService {
 
   createClient(client: ClientRequestModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.post<ClientRequestModule>(
@@ -337,7 +338,7 @@ export class DataService {
 
   updateClient(client: ClientModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.put<any>(
@@ -354,7 +355,7 @@ export class DataService {
 
   deleteClient(id: number): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.delete<any>(`${this.url}/client/${id}`, {
@@ -364,7 +365,7 @@ export class DataService {
 
   getAllClientLocations(): Observable<[ClientLocationModule]> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<[ClientLocationModule]>(`${this.url}/clientlocation`, {
@@ -374,7 +375,7 @@ export class DataService {
 
   getClientLocations(client_id: number): Observable<[ClientLocationModule]> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<[ClientLocationModule]>(
@@ -387,7 +388,7 @@ export class DataService {
 
   getClientLocation(id: number): Observable<ClientLocationModule> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<ClientLocationModule>(
@@ -402,7 +403,7 @@ export class DataService {
     clientLocation: ClientLocationRequestModule
   ): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.post<ClientLocationRequestModule>(
@@ -419,7 +420,7 @@ export class DataService {
 
   updateClientLocation(clientLocation: ClientLocationModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.put<any>(
@@ -436,7 +437,7 @@ export class DataService {
 
   deleteClientLocation(id: number): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.delete<any>(`${this.url}/clientlocation/${id}`, {
@@ -446,7 +447,7 @@ export class DataService {
 
   getDeliveries(): Observable<[DeliveryModule]> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<[DeliveryModule]>(`${this.url}/delivery`, {
@@ -456,7 +457,7 @@ export class DataService {
 
   getDelivery(id: number): Observable<DeliveryModule> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<DeliveryModule>(`${this.url}/delivery/${id}`, {
@@ -466,7 +467,7 @@ export class DataService {
 
   createDelivery(delivery: DeliveryRequestModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.post<DeliveryRequestModule>(
@@ -490,7 +491,7 @@ export class DataService {
 
   updateDelivery(delivery: DeliveryModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.put<any>(
@@ -514,7 +515,7 @@ export class DataService {
 
   deleteDelivery(id: number): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.delete<any>(`${this.url}/delivery/${id}`, {
@@ -524,7 +525,7 @@ export class DataService {
 
   getDeliveryItems(id: number): Observable<[DeliveryItemModule]> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.get<[DeliveryItemModule]>(
@@ -537,7 +538,7 @@ export class DataService {
 
   deleteDeliveryItem(id: number): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.delete<any>(`${this.url}/deliveryitem/${id}`, {
@@ -547,7 +548,7 @@ export class DataService {
 
   createDeliveryItem(deliveryItem: DeliveryItemRequestModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.post<DeliveryItemRequestModule>(
@@ -565,7 +566,7 @@ export class DataService {
 
   updateDeliveryItem(deliveryItem: DeliveryItemModule): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.Token}`,
+      Authorization: `Bearer ${this.cs.get('ep_delivery_cookie')}`,
     });
 
     return this.http.put<DeliveryItemModule>(
